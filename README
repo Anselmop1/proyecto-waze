@@ -1,0 +1,64 @@
+
+# Proyecto de Sistemas Distribuidos: Plataforma de Análisis de Tráfico
+
+Este proyecto implementa una plataforma distribuida para extraer, procesar y visualizar datos de tráfico obtenidos desde Waze Live Map, focalizado en la Región Metropolitana.
+
+##Componentes Principales
+
+- **Scraper**: Obtiene eventos en tiempo real desde Waze.
+- **Storage (Redis)**: Almacena los eventos obtenidos.
+- **Traffic Generator**: Simula consultas al sistema con diferentes tasas de arribo.
+- **Cache**: Acelera el acceso a eventos con políticas LRU y LFU.
+- **Processor**: Calcula métricas agregadas a partir de los eventos.
+- **Visualization**: Dashboard web con Flask para ver las estadísticas procesadas.
+
+## Cómo Ejecutar el Proyecto
+
+### 1. Clona el Repositorio
+
+```bash
+git clone https://github.com/Anselmop1/proyecto-waze.git
+cd proyecto-waze
+```
+
+### 2. Construye y Ejecuta el Sistema
+
+```
+docker-compose up --build
+```
+
+Este comando levanta los siguientes servicios: Redis, scraper, traffic generator, processor y visualización web.
+
+### 3. Ver el Visualizador Web
+
+Abre tu navegador y entra a:
+
+```
+http://localhost:5000
+```
+
+Allí verás:
+
+- Total de eventos
+- Eventos por tipo (tabla)
+- Eventos por calle (tabla)
+
+---
+
+## 🧪 Ejecutar Servicios Manualmente
+
+Si quieres ejecutar ciertos módulos manualmente:
+
+```bash
+# Ejecutar generador de tráfico
+docker exec -it traffic python traffic_generator/generator.py
+
+# Ejecutar procesamiento
+docker exec -it processor python processor/processor.py
+```--
+
+##  Autor
+
+Nombre: Anselmo Pacheco  
+Curso Sistemas Distribuidos 2025-1  
+Profesor: Nicolás Hidalgo
